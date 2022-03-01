@@ -54,6 +54,8 @@ class Minesweeper:
             self.buttons.append(temp)
 
     def click(self, clicked_button: MyButton):
+        if Minesweeper.IS_GAMEOVER:
+            return
         if clicked_button.is_mine:
             clicked_button.config(text="*", background='red', disabledforeground='black')
             clicked_button.is_open = True
