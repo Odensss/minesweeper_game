@@ -102,7 +102,21 @@ class Minesweeper:
                             queue.append(next_btn)
 
 
+    def reload(self):
+        [child.destroy() for child in self.window.winfo_children()]
+        self.__init__()
+        self.create_widgets()
+
     def create_widgets(self):
+
+        menubar = tk.Menu(self.window)
+        self.window.config(menu = menubar)
+        settings_menu = tk.Menu(menubar, tearoff=0)
+        settings_menu.add_command(label='Play',command=self.reload)
+        settings_menu.add_command(label='Settings')
+        settings_menu.add_command(label='Quit', command=self.window.destroy)
+        menubar.add_cascade(label='Game', menu=settings_menu)
+        count = 1
         for i in range(1, Minesweeper.ROW + 1):
             for j in range(1, Minesweeper.COLUMNS + 1):
                 btn = self.buttons[i][j]
