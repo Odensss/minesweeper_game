@@ -34,7 +34,7 @@ class MyButton(tk.Button):
 
 
 class Minesweeper:
-    ROW = 7
+    ROW = 10
     COLUMNS = 10
     window = tk.Tk()
     MINES = 10
