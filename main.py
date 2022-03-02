@@ -72,6 +72,7 @@ class Minesweeper:
             self.insert_mines(clicked_button.number)
             self.count_mines_in_cells()
             self.print_buttons()
+            Minesweeper.IS_FIRST_CLICK = False
 
         if clicked_button.is_mine:
             clicked_button.config(text="*", background='red', disabledforeground='black')
@@ -109,6 +110,8 @@ class Minesweeper:
                 x, y = cur_btn.x, cur_btn.y
                 for dx in [-1, 0, 1]:
                     for dy in [-1, 0, 1]:
+                        if not abs(dx-dy) == 1:
+                            continue
                         next_btn = self.buttons[x + dx][y + dy]
                         if not next_btn.is_open and 1 <= next_btn.x <= Minesweeper.ROW and \
                                 1 <= next_btn.y <= Minesweeper.COLUMNS and next_btn not in queue:
@@ -157,6 +160,7 @@ class Minesweeper:
         self.reload()
 
     def create_widgets(self):
+        count = 1
         menubar = tk.Menu(self.window)
         self.window.config(menu=menubar)
         settings_menu = tk.Menu(menubar, tearoff=0)
@@ -164,7 +168,6 @@ class Minesweeper:
         settings_menu.add_command(label='Settings', command=self.create_settings_win)
         settings_menu.add_command(label='Quit', command=self.window.destroy)
         menubar.add_cascade(label='Game', menu=settings_menu)
-        count = 1
         for i in range(1, Minesweeper.ROW + 1):
             for j in range(1, Minesweeper.COLUMNS + 1):
                 btn = self.buttons[i][j]
