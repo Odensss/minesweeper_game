@@ -12,7 +12,8 @@ colors = {
     5: '#471010',
     6: 'black',
     7: 'black',
-    8: 'black'
+    8: 'black',
+
 
 }
 
@@ -64,9 +65,6 @@ class Minesweeper:
             cur_btn['text'] = ''
             cur_btn['state'] = 'normal'
 
-
-
-
     def click(self, clicked_button: MyButton):
         if Minesweeper.IS_FIRST_CLICK:
             self.insert_mines(clicked_button.number)
@@ -94,6 +92,7 @@ class Minesweeper:
         clicked_button.config(state='disabled')
         clicked_button.config(relief=tk.SUNKEN)
 
+
     def breadth_first_search(self, btn: MyButton):
         queue = [btn]
         while queue:
@@ -106,11 +105,12 @@ class Minesweeper:
             cur_btn.is_open = True
             cur_btn.config(state='disabled')
             cur_btn.config(relief=tk.SUNKEN)
+            cur_btn.config(bg='#a8e5ff')
             if cur_btn.count_bomb == 0:
                 x, y = cur_btn.x, cur_btn.y
                 for dx in [-1, 0, 1]:
                     for dy in [-1, 0, 1]:
-                        if not abs(dx-dy) == 1:
+                        if not abs(dx - dy) == 1:
                             continue
                         next_btn = self.buttons[x + dx][y + dy]
                         if not next_btn.is_open and 1 <= next_btn.x <= Minesweeper.ROW and \
