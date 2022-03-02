@@ -105,7 +105,6 @@ class Minesweeper:
             cur_btn.is_open = True
             cur_btn.config(state='disabled')
             cur_btn.config(relief=tk.SUNKEN)
-            cur_btn.config(bg='#a8e5ff')
             if cur_btn.count_bomb == 0:
                 x, y = cur_btn.x, cur_btn.y
                 for dx in [-1, 0, 1]:
